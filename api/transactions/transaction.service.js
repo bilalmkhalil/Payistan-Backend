@@ -44,5 +44,17 @@ module.exports = {
                 return callBack(null, results);
             }
         );
+    },
+    updateBalance: (id, callback) => {
+        pool.query(
+            `UPDATE balance SET balance "?"`,
+            [id, balance],
+            (error, results, fields) => {
+                if(error) {
+                    callback(error);
+                }
+                return callback(null, results);
+            }
+        );
     }
 };

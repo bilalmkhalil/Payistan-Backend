@@ -35,7 +35,7 @@ module.exports = {
 
     getUserByID: (id, callBack) => {
         pool.query(
-            `SELECT * FROM users WHERE id = ?`,
+            `SELECT * FROM users WHERE userID = ?`,
             [id],
             (error, results, fields) => {
                 if (error) {
@@ -48,6 +48,18 @@ module.exports = {
     getUsers: callBack => {
         pool.query(
             `SELECT * FROM users`,
+            [],
+            (error, results, fields) => {
+                if (error) {
+                    callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
+    },
+    getLastUserID: callBack => {
+        pool.query(
+            `SELECT userID FROM users ORDER BY userID DESC LIMIT 1`,
             [],
             (error, results, fields) => {
                 if (error) {

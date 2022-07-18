@@ -1,4 +1,4 @@
-const { create, getUserByUserEmail, getUserByID, getUsers } = require("./user.service");
+const { create, getUserByUserEmail, getUserByID, getUsers, getLastUserID } = require("./user.service");
 const { genSaltSync, hashSync, compareSync } = require("bcrypt");
 // const { sign } = require("jsonwebtoken");
 
@@ -42,6 +42,19 @@ module.exports = {
 
     getUsers: (req, res) => {
         getUsers((err, results) => {
+            if(err) {
+                console.log(err);
+                return;
+            }
+            return res.status(200).json({
+                success: 1,
+                data: results
+            });
+        });
+    },
+
+    getLastUserID: (req, res) => {
+        getLastUserID((err, results) => {
             if(err) {
                 console.log(err);
                 return;

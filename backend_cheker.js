@@ -11,7 +11,7 @@ let payload = {
     password: "khankhail"
 }
 
-const url = "http://localhost:3333/api/users/login";
+const url = "http://35.89.53.224:3333/api/users/login";
 
 axios.post(url, payload )
     .then(res => {
